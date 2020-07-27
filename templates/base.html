@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>bookmate</title>
     <link rel="stylesheet" href="{% static "bookmate/style.css" %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -12,18 +13,19 @@
 </head>
 <body class="app__background_image" style="background-image: url('{% static "bookmate/images/background-home-page-image.jpg" %}')">
     <nav class="navbar navbar-light app__top_navbar">
-        <div class="ml-4 float-left">
-            <a class="navbar-brand bg-gradient-dark mr-0 " href="#">BOOK</a><a class="navbar-brand text-white bg-dark ml-0" href="#">MATE</a>
-        </div>
-        <div class="mr-4 float-right">
-            <button type="button" class="btn btn-outline-dark">Login</button>
-            <button type="button" class="btn btn-outline-dark">Sign In</button>
+        <div class="container-fluid">
+            <div class="navbar">
+                <a class="navbar-brand bg-gradient-dark mr-0 " href="#">BOOK</a><a class="navbar-brand text-white bg-dark ml-0" href="#">MATE</a>
+            </div>
+            <div class="navbar ml-auto">
+                <a class="btn btn-outline-dark nav-item" href="{% url 'login' %}">Login</a>
+                <a class="btn btn-outline-dark nav-item ml-2" href="{% url 'signin' %}">Sign In</a>
+            </div>
         </div>
     </nav>
-    <div class="container bg-light ">
+
         {% block content %}
 
         {% endblock content %}
-    </div>
 </body>
 </html>
