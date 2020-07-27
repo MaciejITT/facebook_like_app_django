@@ -1,0 +1,9 @@
+.app__top_navbar {
+    background-color: #ffbb00;
+}
+.app__background_image{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-attachment: fixed;
+}
