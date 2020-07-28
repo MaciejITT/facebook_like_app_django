@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
-
+from .forms import SignUpForm
 # Create your views here.
 
 
@@ -12,9 +12,9 @@ def login_page(request):
     return render(request, "bookmate/login.html")
 
 
-def signin_page(request):
-    form = UserCreationForm()
-    context ={
+def sign_up_page(request):
+    form = SignUpForm()
+    context = {
         'form': form,
     }
     return render(request, "bookmate/signin.html", context)
