@@ -1,0 +1,42 @@
+.app__top_navbar {
+    background-color: #ffbb00;
+}
+
+.app__background_image{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-attachment: fixed;
+}
+
+.app__form_background{
+    background-color: #212121;
+    padding: 10px;
+    /*background-image: url("../images/ksiazka_mis.PNG");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;*/
+
+}
+
+.app__bookmate_img{
+    max-height: 40px;
+    max-width: 40px;
+    background-color: #ffbb00;
+}
+
+#id_username , #id_last_name,
+#id_first_name, #id_sex,
+#id_email, #id_password1,
+#id_password2{
+    color: white;
+    background-color: #424242;
+    opacity: .7;
+}
+
+#div_id_username , #div_id_last_name,
+#div_id_first_name, #div_id_sex,
+#div_id_email, #div_id_password1,
+#div_id_password2{
+    color: lightgray;
+}

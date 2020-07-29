@@ -10,8 +10,8 @@ class SignUpForm(UserCreationForm):
         ('Female', 'Female'),
         ('Neither', 'Neither')
     )
-    first_name = forms.CharField(max_length=30, help_text='Please enter your name ')
-    last_name = forms.CharField(max_length=30, help_text='Please enter your last name')
+    first_name = forms.CharField(max_length=30)
+    last_name = forms.CharField(max_length=30)
     email = forms.EmailField(max_length=200, required=True, help_text='Required. Enter valid email address')
     sex = forms.ChoiceField(choices=sexes)
 

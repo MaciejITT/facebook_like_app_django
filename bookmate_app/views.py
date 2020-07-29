@@ -9,7 +9,7 @@ def home_page(request):
 
 
 def login_page(request):
-    return render(request, "bookmate/login.html")
+    return render(request, "bookmate_app/login.html")
 
 
 def sign_up_page(request):
@@ -17,5 +17,5 @@ def sign_up_page(request):
     context = {
         'form': form,
     }
-    return render(request, "bookmate/signin.html", context)
+    return render(request, "bookmate_app/signin.html", context)
 
