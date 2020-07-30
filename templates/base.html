@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,16 +8,13 @@
     <title>BOOKMATE</title>
     <link rel="stylesheet" type="text/css" href="{% static 'bookmate_app/style.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
 </head>
 <body class="app__background_image" style="background-image: url('{% static "images/background-home-page-image.jpg" %}')">
     <nav class="navbar navbar-light app__top_navbar">
         <div class="container-fluid">
             <div class="navbar">
                 <a class="navbar-brand bg-gradient-dark mr-0 " href="#">BOOK</a><a class="navbar-brand text-white bg-dark ml-0" href="#">MATE</a>
-                <!--<img class="app__bookmate_img" src="{% static 'images/ksiazka_mis.PNG' %}">-->
             </div>
             <div class="navbar ml-auto">
                 <a class="btn btn-outline-dark nav-item" href="{% url 'login' %}">Login</a>
