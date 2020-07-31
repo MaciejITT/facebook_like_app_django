@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block navbar %}
+    <nav class="navbar navbar-light app__top_navbar">
+        <div class="container-fluid">
+            <div class="navbar">
+                <a class="navbar-brand bg-gradient-dark mr-0 " href="#">BOOK</a><a class="navbar-brand text-white bg-dark ml-0" href="#">MATE</a>
+            </div>
+            <div class="navbar ml-auto">
+                <a class="btn btn-outline-dark nav-item" href="{% url 'login' %}">Login</a>
+                <a class="btn btn-outline-dark nav-item ml-2" href="{% url 'signin' %}">Sign In</a>
+            </div>
+        </div>
+    </nav>
+{% endblock navbar %}

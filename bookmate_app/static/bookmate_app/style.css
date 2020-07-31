@@ -12,7 +12,6 @@
 .app__form_background{
     background-color: #212121;
     padding: 10px;
-
 }
 
 .app__user_home_page{
@@ -22,10 +21,14 @@
     border-radius: 10px;
 }
 
+.app__text_color{
+    color: white;
+}
+
 #id_username , #id_last_name,
 #id_first_name, #id_sex,
 #id_email, #id_password1,
-#id_password2{
+#id_password2, #id_password {
     color: white;
     background-color: #424242;
     opacity: .7;
@@ -34,7 +37,10 @@
 #div_id_username , #div_id_last_name,
 #div_id_first_name, #div_id_sex,
 #div_id_email, #div_id_password1,
-#div_id_password2{
+#div_id_password2 {
     color: lightgray;
 }
+
+
+
 

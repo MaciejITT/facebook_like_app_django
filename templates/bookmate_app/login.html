@@ -1,5 +1,52 @@
-{% extends "base.html" %}
+{% extends "base2.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-
+ <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-4">
+                </div>
+                <div class="col-sm-4 app__form_background rounded mt-5">
+                    <form method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        <div id="div_id_username" class="form-group">
+                            <label for="id_username" class=" requiredField">
+                                Username
+                            </label>
+                            <div>
+                                 <input
+                                         type="text"
+                                         name="username"
+                                         maxlength="150"
+                                         autofocus=""
+                                         class="textinput textInput form-control"
+                                         required=""
+                                         id="id_username">
+                            </div>
+                        </div>
+                        <div id="div_id_password1" class="form-group">
+                            <label for="id_password1" class=" requiredField">
+                                Password
+                            </label>
+                            <div>
+                                <input
+                                        type="password"
+                                        name="password1"
+                                        autocomplete="new-password"
+                                        class="textinput textInput form-control"
+                                        required=""
+                                        id="id_password1">
+                            </div>
+                        </div>
+                        <input class="btn btn-primary mb-2" type="submit" value="Submit">
+                        <input class="btn btn-info mb-2" type="reset" value="Reset">
+                    </form>
+                    {% for msg in messages %}
+                       <p style="color: firebrick">{{ msg }}</p>
+                    {% endfor %}
+                </div>
+                <div class="col-sm-4">
+                </div>
+            </div>
+        </div>
 {% endblock content %}
