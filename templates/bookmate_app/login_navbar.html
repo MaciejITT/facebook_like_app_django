@@ -1,11 +1,21 @@
-<nav class="navbar navbar-light app__top_navbar">
+<nav class="navbar navbar-expand-lg navbar-light app__top_navbar">
         <div class="container-fluid">
             <div class="navbar">
                 <a class="navbar-brand bg-gradient-dark mr-0 " href="#">BOOK</a><a class="navbar-brand text-white bg-dark ml-0" href="#">MATE</a>
             </div>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    {% if  request.user.is_staff %}
+                    <li class="nav-item active">
+                        <a class="nav-link navbar-brand" href="{% url 'statistics' %}">Statistics</a>
+                    </li>
+                    {% endif %}
+                </ul>
+
             <div class="navbar ml-auto">
                 <span class="navbar-brand">Hello, {{ request.user }}</span>
                 <span class="ml-2 navbar-brand"><a class="badge badge-dark" href="{% url 'logout' %}">Logout</a></span>
+            </div>
             </div>
         </div>
 </nav>

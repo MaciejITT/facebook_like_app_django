@@ -1,6 +1,35 @@
 {% extends 'base3.html' %}
-
+{% load static %}
 {% block content %}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-3 bg-dark rounded mt-3 mr-1 ml-1 text-white">
+                    <div class="list-group mt-2" id="list-tab" role="tablist">
+                      <a class="list-group-item list-group-item-action bg-dark text-white" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
+                      <a class="list-group-item list-group-item-action bg-dark text-white" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
+                      <a class="list-group-item list-group-item-action bg-dark text-white" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
+                      <a class="list-group-item list-group-item-action bg-dark text-white" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+                    </div>
+                </div>
+                <div class="col-sm-5 bg-dark rounded mt-3 mr-1 mx-auto pb-4">
+                    <div class="card mx-auto mt-4" style="width: auto;">
+                        <img src="{% static 'images/ksiazka_mis.PNG' %}" class="card-img-top">
+                        <div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
 
+                </div>
+                <div class="col-sm-3 bg-dark rounded mt-3 mr-1 ml-1 text-white">
+                    <ul class="list-group list-group-flush mt-2">
+                        <li class="list-group-item bg-dark text-white">Cras justo odio</li>
+                        <li class="list-group-item bg-dark text-white">Dapibus ac facilisis in</li>
+                        <li class="list-group-item bg-dark text-white">Morbi leo risus</li>
+                        <li class="list-group-item bg-dark text-white">Porta ac consectetur ac</li>
+                        <li class="list-group-item bg-dark text-white">Vestibulum at eros</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
 {% endblock content %}

@@ -2,13 +2,18 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from .forms import SignUpForm
 from django.contrib import messages
+from django.contrib.auth.models import Group
+from django.contrib.auth.decorators import login_required
+from .decorators import unauthenticated_user, allowed_user
 # Create your views here.
 
 
+@login_required(login_url='login')
 def home_page(request):
     return render(request, 'bookmate_app/home.html')
 
 
+@unauthenticated_user
 def login_page(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -23,17 +28,20 @@ def login_page(request):
     return render(request, "bookmate_app/login.html")
 
 
+@unauthenticated_user
 def sign_up_page(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
+            group = Group.objects.get(name='website_user')
             user.refresh_from_db()
             user.profile.first_name = form.cleaned_data.get('first_name')
             user.profile.last_name = form.cleaned_data.get('last_name')
             user.profile.email = form.cleaned_data.get('email')
             user.profile.sex = form.cleaned_data.get('sex')
             user.save()
+            user.groups.add(group)
             messages.success(request, 'Account created')
             return redirect('login')
 
@@ -46,6 +54,13 @@ def sign_up_page(request):
     return render(request, "bookmate_app/signin.html", context)
 
 
+@login_required(login_url='login')
 def logout_user(request):
     logout(request)
     return render(request, 'bookmate_app/login.html')
+
+
+@login_required(login_url='login')
+@allowed_user(allowed_roles=['admin'])
+def statistics_page(request):
+    return render(request, 'bookmate_app/statistics.html')
