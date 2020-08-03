@@ -2,6 +2,12 @@
     background-color: #ffbb00;
 }
 
+.app__search_customization {
+    border: 0;
+    border-bottom: 1px solid black;
+    background-color: #ffbb00;
+}
+
 .app__background_image{
     background-size: cover;
     background-repeat: no-repeat;

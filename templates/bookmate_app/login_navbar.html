@@ -1,21 +1,29 @@
 <nav class="navbar navbar-expand-lg navbar-light app__top_navbar">
         <div class="container-fluid">
             <div class="navbar">
-                <a class="navbar-brand bg-gradient-dark mr-0 " href="#">BOOK</a><a class="navbar-brand text-white bg-dark ml-0" href="#">MATE</a>
+                <span><a class="navbar-brand bg-gradient-dark mr-0 " href="#">BOOK</a>
+                <a class="navbar-brand text-white bg-dark ml-0" href="#">MATE</a></span>
             </div>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     {% if  request.user.is_staff %}
-                    <li class="nav-item active">
-                        <a class="nav-link navbar-brand" href="{% url 'statistics' %}">Statistics</a>
+                    <li class="nav-item ">
+                        <a class="nav-link navbar-brand text-dark" href="{% url 'statistics' %}">Statistics</a>
                     </li>
                     {% endif %}
                 </ul>
 
-            <div class="navbar ml-auto">
-                <span class="navbar-brand">Hello, {{ request.user }}</span>
-                <span class="ml-2 navbar-brand"><a class="badge badge-dark" href="{% url 'logout' %}">Logout</a></span>
-            </div>
+                <form class="form-inline">
+                    <span><input class="form-control app__search_customization" type="search" placeholder="Search" aria-label="Search"></span>
+                    <span><a class="ml-2 mt-1 badge badge-warning" href="#" type="submit"><i class="material-icons">search</i></a></span>
+                </form>
+
+                <div class="navbar ml-auto">
+                    <span class="navbar-brand">Hello, {{ request.user }}</span>
+                    <span class="navbar-brand"><a class="badge badge-dark" href="{% url 'home' %}" ><i class="material-icons">home</i></a></span>
+                    <span class="navbar-brand"><a class="badge badge-dark" href="{% url 'profile' %}" ><i class="material-icons">person</i></a></span>
+                    <span class="navbar-brand"><a class="badge badge-dark" href="{% url 'logout' %}"><i class="material-icons">exit_to_app</i></a></span>
+                </div>
             </div>
         </div>
 </nav>

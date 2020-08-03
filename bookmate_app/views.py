@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user, allowed_user
+from .models import Profile
 # Create your views here.
 
 
@@ -61,6 +62,28 @@ def logout_user(request):
 
 
 @login_required(login_url='login')
+def user_profile_page(request):
+    user = Profile.objects.get(pk=request.user.pk)
+    user_sex = user.sex
+    username = request.user.username
+    first_name = request.user.first_name
+    last_name = request.user.last_name
+    user_email = request.user.email
+
+    context ={
+        'username': username,
+        'first_name': first_name,
+        'last_name': last_name,
+        'user_email': user_email,
+        'user_sex': user_sex,
+    }
+    return render(request, 'bookmate_app/user_profile.html', context)
+
+
+@login_required(login_url='login')
 @allowed_user(allowed_roles=['admin'])
 def statistics_page(request):
     return render(request, 'bookmate_app/statistics.html')
+
+
+
