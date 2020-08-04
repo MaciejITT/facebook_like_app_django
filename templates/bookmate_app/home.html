@@ -22,14 +22,13 @@
                 </div>
                 <div class="col-sm-3 bg-dark rounded mt-3 mr-1 ml-1 text-white">
                     <ul class="list-group list-group-flush mt-2">
-                        <li class="list-group-item bg-dark text-white">Cras justo odio</li>
-                        <li class="list-group-item bg-dark text-white">Dapibus ac facilisis in</li>
-                        <li class="list-group-item bg-dark text-white">Morbi leo risus</li>
-                        <li class="list-group-item bg-dark text-white">Porta ac consectetur ac</li>
-                        <li class="list-group-item bg-dark text-white">Vestibulum at eros</li>
+                    {% if friend_id_list %}
+                        {% for friend in friend_name %}
+                            <li class="list-group-item bg-dark text-white">{{ friend }}</li>
+                        {% endfor %}
+                    {% endif %}
                     </ul>
                 </div>
             </div>
         </div>
-
 {% endblock content %}

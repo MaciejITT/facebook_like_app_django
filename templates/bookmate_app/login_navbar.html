@@ -12,14 +12,19 @@
                     </li>
                     {% endif %}
                 </ul>
-
                 <form class="form-inline">
-                    <span><input class="form-control app__search_customization" type="search" placeholder="Search" aria-label="Search"></span>
+                    <span><input class="form-control app__search_customization"
+                                 style="border: 0;
+                                        border-bottom: 1px solid black;
+                                        background-color: #ffbb00;
+                                        border-radius: 0px;"
+                                 type="search"></span>
                     <span><a class="ml-2 mt-1 badge badge-warning" href="#" type="submit"><i class="material-icons">search</i></a></span>
                 </form>
 
                 <div class="navbar ml-auto">
                     <span class="navbar-brand">Hello, {{ request.user }}</span>
+                    <span class="navbar-brand"><a class="badge badge-dark" href="" ><i class="material-icons">markunread</i>x</a></span>
                     <span class="navbar-brand"><a class="badge badge-dark" href="{% url 'home' %}" ><i class="material-icons">home</i></a></span>
                     <span class="navbar-brand"><a class="badge badge-dark" href="{% url 'profile' %}" ><i class="material-icons">person</i></a></span>
                     <span class="navbar-brand"><a class="badge badge-dark" href="{% url 'logout' %}"><i class="material-icons">exit_to_app</i></a></span>

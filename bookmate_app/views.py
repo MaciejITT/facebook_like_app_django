@@ -5,13 +5,31 @@ from django.contrib import messages
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user, allowed_user
-from .models import Profile
+from .models import Profile, FriendshipRelations
 # Create your views here.
 
 
 @login_required(login_url='login')
 def home_page(request):
-    return render(request, 'bookmate_app/home.html')
+    friends = FriendshipRelations.objects.all()
+    user = Profile.objects.get(user_id=request.user.id)
+    friend_id_list = []
+    friend_name = []
+    for friend in friends:
+        print(user.user_id, friend.user.first_name, friend.user_friend.id, friend.users_status)
+        if user.user_id == friend.user.id and friend.users_status == 'friend':
+            friend_name.append(friend.user_friend.first_name + ' ' + friend.user_friend.last_name)
+            friend_id_list.append(friend.user_friend.id)
+        if user.user_id == friend.user_friend.id and friend.users_status == 'friend':
+            friend_name.append(friend.user.first_name + ' ' + friend.user.last_name)
+            friend_id_list.append(friend.user.first_name + ' ' + friend.user.last_name)
+    print(friend_id_list)
+    context = {
+        'friend_name': friend_name,
+        'friend_id_list': friend_id_list,
+    }
+
+    return render(request, 'bookmate_app/home.html', context)
 
 
 @unauthenticated_user
@@ -70,7 +88,7 @@ def user_profile_page(request):
     last_name = request.user.last_name
     user_email = request.user.email
 
-    context ={
+    context = {
         'username': username,
         'first_name': first_name,
         'last_name': last_name,
@@ -84,6 +102,5 @@ def user_profile_page(request):
 @allowed_user(allowed_roles=['admin'])
 def statistics_page(request):
     return render(request, 'bookmate_app/statistics.html')
-
 
 

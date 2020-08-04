@@ -26,3 +26,19 @@ def update_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
     instance.profile.save()
+
+
+class FriendshipRelations(models.Model):
+    status_list = (
+        ('friend', 'friend'),
+        ('unrelated', 'unrelated'),
+        ('ignored', 'ignored'),
+    )
+    user = models.ForeignKey(User, related_name='invitation_sender', on_delete=models.CASCADE)
+    user_friend = models.ForeignKey(User, related_name='invitation_receiver', on_delete=models.CASCADE)
+    users_status = models.CharField(max_length=10, choices=status_list)
+    relation_date = models.DateTimeField('relation_creation_date')
+
+    def __str__(self):
+        return self.user.username + '-' + self.user_friend.username + ': ' + self.users_status
+
