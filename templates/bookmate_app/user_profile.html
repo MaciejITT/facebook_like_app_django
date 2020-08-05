@@ -5,9 +5,11 @@
             <div class="row">
                 <div class="col-sm-3 bg-dark rounded mt-3 mr-1 ml-1 pt-3 pb-3 text-white">
                     <div class="mx-auto" style="max-width: 200px">
+                        <a class="float-right btn btn-outline-light rounded-circle"
+                                style=" width: 50px ; height: 50px"
+                                href="{% url 'update_user' %}">
+                            <i class="material-icons mt-1">mode_edit</i></a>
                         <img src="{% static 'images/profile_picture.png' %}" style="height: 200px; width: 200px;"/>
-                        <div class="float-right btn btn-outline-light rounded-circle" style="width: 50px ; height: 50px">
-                            <i class="material-icons mt-1">mode_edit</i></div>
 
                         <div class="mt-3 text-white bg-dark" style="width: 200px;">
                              <div>

@@ -74,6 +74,25 @@ def sign_up_page(request):
 
 
 @login_required(login_url='login')
+def update_user_data(request):
+    username = request.user.username
+    first_name = request.user.first_name
+    last_name = request.user.last_name
+    email = request.user.email
+    sex_ = Profile.objects.get(user_id=request.user.id)
+    sex = sex_.sex
+
+    context = {
+        'username': username,
+        'firstname': first_name,
+        'lastname': last_name,
+        'email': email,
+        'sex': sex,
+    }
+    return render(request, 'bookmate_app/update_user_data.html', context)
+
+
+@login_required(login_url='login')
 def logout_user(request):
     logout(request)
     return render(request, 'bookmate_app/login.html')
