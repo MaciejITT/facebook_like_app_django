@@ -7,30 +7,13 @@
                 <div class="col-sm-3">
                 </div>
                 <div class="col-sm-6 app__form_background rounded mt-3">
-                    <form method="post" action="">
+                    <form method="post" action="{% url 'update_user' %}" >
                         {% csrf_token %}
-                        <div class="form-group ">
-                            <input type="text" value="{{ username }}">
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-5">
-                                <input type="text" value="{{ firstname }}">
-                            </div>
-                            <div class="form-group col-md-5">
-                                <input type="text" value="{{ lastname }}">
-                            </div>
-                            <div class="form-group col-md-2">
-                                <select>
-                                    <option>{{ sex }}</option>
-                                    <option>Male</option>
-                                    <option>Female</option>
-                                    <option>Neither</option>
-                                </select>
-                            </div>
-                        </div>
-                            <div class="form-group">
-                                <input type="text" value="{{ email }}">
-                            </div>
+                        {{ form.username|as_crispy_field }}
+                        {{ form.first_name|as_crispy_field }}
+                        {{ form.last_name|as_crispy_field }}
+                        {{ form.sex|as_crispy_field }}
+                        {{ form.email|as_crispy_field }}
                         <input class="btn btn-primary mb-2" type="submit" value="Submit">
                         <input class="btn btn-info mb-2" type="button" value="Back">
                     </form>

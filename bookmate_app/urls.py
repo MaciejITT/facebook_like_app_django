@@ -11,5 +11,5 @@ urlpatterns = [
     path('home/', views.home_page, name='home'),
     path('statistics/', views.statistics_page, name='statistics'),
     path('profile/', views.user_profile_page, name='profile'),
-    path('update_user_info/', views.update_user_data, name='update_user')
+    path('profile/edit', views.update_user_data, name='update_user')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bookmate_app.apps.BookmateAppConfig',
     'crispy_forms',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [

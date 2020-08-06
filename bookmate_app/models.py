@@ -42,3 +42,17 @@ class FriendshipRelations(models.Model):
     def __str__(self):
         return self.user.username + '-' + self.user_friend.username + ': ' + self.users_status
 
+
+class UsersInvitations(models.Model):
+    invitation_status = (
+        ('confirmed', 'confirmed'),
+        ('rejected', 'rejected'),
+        ('waiting', 'waiting'),
+    )
+    user = models.ForeignKey(User, related_name='user_invitation_sent', on_delete=models.CASCADE)
+    user_invited = models.ForeignKey(User, related_name='user_invitation_receiver', on_delete=models.CASCADE)
+    users_status = models.CharField(max_length=10, choices=invitation_status)
+    relation_date = models.DateTimeField('relation_creation_date')
+
+    def __str__(self):
+        return self.user.username + '-' + self.user_invited.username + ': ' + self.users_status

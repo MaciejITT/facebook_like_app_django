@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
-from .forms import SignUpForm
+from .forms import SignUpForm, UpdateUserInfo
 from django.contrib import messages
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user, allowed_user
 from .models import Profile, FriendshipRelations
+from django.contrib.auth.forms import UserChangeForm
 # Create your views here.
 
 
@@ -16,14 +17,12 @@ def home_page(request):
     friend_id_list = []
     friend_name = []
     for friend in friends:
-        print(user.user_id, friend.user.first_name, friend.user_friend.id, friend.users_status)
         if user.user_id == friend.user.id and friend.users_status == 'friend':
             friend_name.append(friend.user_friend.first_name + ' ' + friend.user_friend.last_name)
             friend_id_list.append(friend.user_friend.id)
         if user.user_id == friend.user_friend.id and friend.users_status == 'friend':
             friend_name.append(friend.user.first_name + ' ' + friend.user.last_name)
             friend_id_list.append(friend.user.first_name + ' ' + friend.user.last_name)
-    print(friend_id_list)
     context = {
         'friend_name': friend_name,
         'friend_id_list': friend_id_list,
@@ -54,12 +53,7 @@ def sign_up_page(request):
         if form.is_valid():
             user = form.save()
             group = Group.objects.get(name='website_user')
-            user.refresh_from_db()
-            user.profile.first_name = form.cleaned_data.get('first_name')
-            user.profile.last_name = form.cleaned_data.get('last_name')
-            user.profile.email = form.cleaned_data.get('email')
-            user.profile.sex = form.cleaned_data.get('sex')
-            user.save()
+            add_data_to_profile(form, user)
             user.groups.add(group)
             messages.success(request, 'Account created')
             return redirect('login')
@@ -75,21 +69,18 @@ def sign_up_page(request):
 
 @login_required(login_url='login')
 def update_user_data(request):
-    username = request.user.username
-    first_name = request.user.first_name
-    last_name = request.user.last_name
-    email = request.user.email
-    sex_ = Profile.objects.get(user_id=request.user.id)
-    sex = sex_.sex
-
-    context = {
-        'username': username,
-        'firstname': first_name,
-        'lastname': last_name,
-        'email': email,
-        'sex': sex,
-    }
-    return render(request, 'bookmate_app/update_user_data.html', context)
+    if request.method == 'POST':
+        form = UpdateUserInfo(request.POST, instance=request.user)
+        if form.is_valid():
+            user = form.save()
+            add_data_to_profile(form, user)
+            return redirect('profile')
+    else:
+        form = UpdateUserInfo(instance=request.user)
+        context = {
+            'form': form
+        }
+        return render(request, 'bookmate_app/update_user_data.html', context)
 
 
 @login_required(login_url='login')
@@ -123,3 +114,11 @@ def statistics_page(request):
     return render(request, 'bookmate_app/statistics.html')
 
 
+def add_data_to_profile(form, user):
+    user.refresh_from_db()
+    user.profile.first_name = form.cleaned_data.get('first_name')
+    user.profile.last_name = form.cleaned_data.get('last_name')
+    user.profile.email = form.cleaned_data.get('email')
+    user.profile.sex = form.cleaned_data.get('sex')
+    user.save()
+    return user

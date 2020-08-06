@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 
 
@@ -17,3 +17,17 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'sex', 'email', 'password1', 'password2',)
+
+
+class UpdateUserInfo(UserChangeForm):
+    sexes = (
+        ('Male', 'Male'),
+        ('Female', 'Female'),
+        ('Neither', 'Neither')
+    )
+    sex = forms.ChoiceField(choices=sexes, required=True)
+
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'sex', 'email')
+        exclude = ('password',)
