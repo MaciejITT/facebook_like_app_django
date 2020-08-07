@@ -2,11 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from .forms import SignUpForm, UpdateUserInfo
 from django.contrib import messages
-from django.contrib.auth.models import Group, User
+from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user, allowed_user
-from .models import Profile, FriendshipRelations
-from django.contrib.auth.forms import UserChangeForm
+from .models import Profile, FriendshipRelations, UsersInvitations
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 # Create your views here.
 
 
@@ -106,6 +107,40 @@ def user_profile_page(request):
         'user_sex': user_sex,
     }
     return render(request, 'bookmate_app/user_profile.html', context)
+
+
+@login_required(login_url='login')
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, form.user)
+            add_data_to_profile(form, user)
+            return redirect('profile')
+        else:
+            return redirect('change_password')
+    else:
+        form = PasswordChangeForm(user=request.user)
+        context = {
+            'form': form
+        }
+        return render(request, 'bookmate_app/change_password.html', context)
+
+
+@login_required(login_url='login')
+def invitations_from_users(request):
+    all_invitations = UsersInvitations.objects.all()
+    user_invitations = UsersInvitations.objects.get(user_id=request.user.id)
+    count = 0
+    for invitation in all_invitations:
+        if invitation.users_status == 'waiting' and invitation.user_invited == user_invitations:
+            count = count + 1
+    print(count)
+    context = {
+        'count': count
+    }
+    return render(request, 'base3.html', context)
 
 
 @login_required(login_url='login')
